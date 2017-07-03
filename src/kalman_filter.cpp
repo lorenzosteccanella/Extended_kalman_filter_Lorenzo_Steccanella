@@ -61,6 +61,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   z_pred << rho, theta, ro_dot;
 
   VectorXd yV = z - z_pred;
+  yV(1) = atan2( sin( yV(1) ), cos( yV(1) ) );
 
   MatrixXd Ht = H_.transpose();
   MatrixXd S = H_ * P_ * Ht + R_;
